@@ -7,7 +7,7 @@ import yaml
 
 from .db import DB
 
-__version__ = "1.1.4"
+__version__ = "1.1.5"
 
 logging.basicConfig(format="%(asctime)s: %(message)s",
                     level=logging.INFO)

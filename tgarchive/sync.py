@@ -181,7 +181,8 @@ class Sync:
                 content=sticker if sticker else m.raw_text,
                 reply_to=m.reply_to_msg_id if m.reply_to and m.reply_to.reply_to_msg_id else None,
                 user=self._get_user(m.sender),
-                media=med
+                media=med,
+                message_thread_id=m.message_thread_id
             )
 
     def _fetch_messages(self, group, offset_id, ids=None) -> Message:
@@ -308,7 +309,7 @@ class Sync:
     def _download_media(self, msg) -> [str, str, str]:
         """
         Download a media / file attached to a message and return its original
-        filename, sanitized name on disk, and the thumbnail (if any). 
+        filename, sanitized name on disk, and the thumbnail (if any).
         """
         # Download the media to the temp dir and copy it back as
         # there does not seem to be a way to get the canonical
