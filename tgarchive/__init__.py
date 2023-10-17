@@ -161,3 +161,7 @@ def main():
         b.build()
 
         logging.info("published to directory '{}'".format(config["publish_dir"]))
+
+
+if __name__ == "__main__":
+    main()

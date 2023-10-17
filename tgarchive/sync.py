@@ -173,6 +173,11 @@ class Sync:
                 elif isinstance(m.action, telethon.tl.types.MessageActionChatDeleteUser):
                     typ = "user_left"
 
+            message_thread_id = -1
+            if hasattr(m.reply_to, 'reply_to_top_id'):
+                logging.info("m has reply_to_top_id")
+                message_thread_id = m.reply_to.reply_to_top_id
+
             yield Message(
                 type=typ,
                 id=m.id,
@@ -182,7 +187,7 @@ class Sync:
                 reply_to=m.reply_to_msg_id if m.reply_to and m.reply_to.reply_to_msg_id else None,
                 user=self._get_user(m.sender),
                 media=med,
-                message_thread_id=m.message_thread_id
+                message_thread_id=message_thread_id
             )
 
     def _fetch_messages(self, group, offset_id, ids=None) -> Message:
